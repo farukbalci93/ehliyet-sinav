@@ -842,6 +842,8 @@
   }
 
   #adFreeNotice.hidden { display: none; }
+  #privacyModal.hidden { display: none; }
+  #privacyModal:not(.hidden) { display: flex; }
 
   .ad-free-card {
     background: var(--surface);
@@ -999,7 +1001,7 @@
 </div>
 
 <!-- ═══════════════════ GİZLİLİK POLİTİKASI MODALI ═══════════════════ -->
-<div id="privacyModal" class="hidden" style="position:fixed;inset:0;z-index:9998;background:rgba(13,17,23,0.97);display:flex;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+<div id="privacyModal" class="hidden" style="position:fixed;inset:0;z-index:9998;background:rgba(13,17,23,0.97);align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
   <div style="width:100%;max-width:700px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px 32px;position:relative;margin:auto;">
     <button onclick="document.getElementById('privacyModal').classList.add('hidden')" style="position:absolute;top:16px;right:16px;background:var(--surface2);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">✕</button>
 
