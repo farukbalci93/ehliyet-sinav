@@ -991,6 +991,61 @@
     <p style="font-size:12px; color: var(--text3); margin-top: 8px;">
       📅 Geçme notu: <strong style="color: var(--accent2);">70 / 100</strong>
     </p>
+
+    <p style="font-size:12px; color: var(--text3); margin-top: 24px;">
+      <button onclick="document.getElementById('privacyModal').classList.remove('hidden')" style="background:none;border:none;color:var(--text3);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:12px;font-family:inherit;">Gizlilik Politikası</button>
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════ GİZLİLİK POLİTİKASI MODALI ═══════════════════ -->
+<div id="privacyModal" class="hidden" style="position:fixed;inset:0;z-index:9998;background:rgba(13,17,23,0.97);display:flex;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="width:100%;max-width:700px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px 32px;position:relative;margin:auto;">
+    <button onclick="document.getElementById('privacyModal').classList.add('hidden')" style="position:absolute;top:16px;right:16px;background:var(--surface2);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">✕</button>
+
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--text);margin-bottom:6px;">Gizlilik Politikası</h2>
+    <p style="font-size:12px;color:var(--text3);margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--border);">Son güncelleme: Mart 2026 · ehliyetimialiyorum.netlify.app</p>
+
+    <p style="color:var(--text2);font-size:14px;margin-bottom:14px;">Bu gizlilik politikası, <strong>Ehliyet Sınav Pratik</strong> web sitesini kullanırken kişisel verilerinizin nasıl toplandığını, kullanıldığını ve korunduğunu açıklamaktadır.</p>
+
+    <h3 style="font-size:1rem;font-weight:600;color:var(--accent2);margin:28px 0 10px;">1. Toplanan Bilgiler</h3>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:10px;">Sitemiz ücretsiz bir eğitim platformudur. Kullanıcılardan doğrudan kişisel bilgi (ad, e-posta vb.) toplanmamaktadır. Bununla birlikte aşağıdaki teknik veriler otomatik olarak işlenebilir:</p>
+    <ul style="color:var(--text2);font-size:14px;margin:0 0 14px 20px;">
+      <li style="margin-bottom:4px;">Tarayıcı türü ve sürümü</li>
+      <li style="margin-bottom:4px;">Ziyaret edilen sayfalar ve geçirilen süre</li>
+      <li style="margin-bottom:4px;">IP adresi (anonim olarak)</li>
+      <li style="margin-bottom:4px;">Cihaz türü ve işletim sistemi</li>
+    </ul>
+
+    <h3 style="font-size:1rem;font-weight:600;color:var(--accent2);margin:28px 0 10px;">2. Çerezler (Cookies)</h3>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:10px;">Sitemiz kullanıcı deneyimini iyileştirmek amacıyla çerezler kullanmaktadır:</p>
+    <ul style="color:var(--text2);font-size:14px;margin:0 0 14px 20px;">
+      <li style="margin-bottom:4px;"><strong>Zorunlu:</strong> Reklamsız süreyi (1 saat) takip etmek için localStorage kullanılır. Bu veri yalnızca cihazınızda saklanır.</li>
+      <li style="margin-bottom:4px;"><strong>Reklam Çerezleri:</strong> Google AdSense aracılığıyla ilgi alanlarınıza uygun reklamlar gösterilebilir.</li>
+    </ul>
+
+    <h3 style="font-size:1rem;font-weight:600;color:var(--accent2);margin:28px 0 10px;">3. Google AdSense ve Reklam</h3>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:10px;">Bu site reklam hizmetleri için <strong>Google AdSense</strong> kullanmaktadır. Google, kullanıcıların ilgi alanlarına dayalı reklamlar göstermek için çerezlerden faydalanabilir.</p>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:14px;">
+      <p style="color:var(--text2);font-size:13px;margin:0;">🔗 Reklam tercihlerinizi yönetmek için: <a href="https://adssettings.google.com" target="_blank" rel="noopener" style="color:var(--accent2);">adssettings.google.com</a></p>
+    </div>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:10px;">Google'ın gizlilik politikası: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:var(--accent2);">policies.google.com/privacy</a></p>
+
+    <h3 style="font-size:1rem;font-weight:600;color:var(--accent2);margin:28px 0 10px;">4. Veri Güvenliği</h3>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:10px;">Kullanıcı verilerinin güvenliğini sağlamak için uygun teknik önlemler alınmaktadır. Ancak internet üzerinden hiçbir veri iletiminin %100 güvenli olmadığını belirtmek gerekir.</p>
+
+    <h3 style="font-size:1rem;font-weight:600;color:var(--accent2);margin:28px 0 10px;">5. Haklarınız (KVKK)</h3>
+    <ul style="color:var(--text2);font-size:14px;margin:0 0 14px 20px;">
+      <li style="margin-bottom:4px;">Verilerinizin işlenip işlenmediğini öğrenme</li>
+      <li style="margin-bottom:4px;">Verilerinize erişim talep etme</li>
+      <li style="margin-bottom:4px;">Verilerinizin düzeltilmesini veya silinmesini talep etme</li>
+      <li style="margin-bottom:4px;">Veri işlemeye itiraz etme</li>
+    </ul>
+
+    <h3 style="font-size:1rem;font-weight:600;color:var(--accent2);margin:28px 0 10px;">6. Politika Güncellemeleri</h3>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:28px;">Bu gizlilik politikası zaman zaman güncellenebilir. Siteyi kullanmaya devam etmeniz güncellenmiş politikayı kabul ettiğiniz anlamına gelir.</p>
+
+    <button onclick="document.getElementById('privacyModal').classList.add('hidden')" style="width:100%;padding:12px;border-radius:10px;border:none;background:var(--surface2);color:var(--text2);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;">Kapat</button>
   </div>
 </div>
 
