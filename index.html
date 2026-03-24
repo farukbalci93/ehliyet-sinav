@@ -710,252 +710,27 @@
      crossorigin="anonymous"></script>
 
 <style>
-  /* ── AD SPLASH OVERLAY ── */
-  #adSplash {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: rgba(13,17,23,0.97);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 24px 16px;
-    backdrop-filter: blur(4px);
-  }
-
-  #adSplash.hidden { display: none; }
-
-  .ad-splash-inner {
-    width: 100%;
-    max-width: 520px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .ad-splash-header {
-    text-align: center;
-  }
-
-  .ad-splash-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-
-  .ad-splash-header p {
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.5;
-  }
-
-  .ad-splash-header p strong {
-    color: var(--accent2);
-  }
-
-  /* Reklam sayacı */
-  .ad-counter-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .ad-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--border);
-    transition: background 0.3s;
-  }
-
-  .ad-dot.done { background: var(--accent); }
-  .ad-dot.active { background: var(--blue); }
-
-  /* Reklam kutusu */
-  .ad-box {
-    width: 100%;
-    min-height: 250px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .ad-loading-label {
-    font-size: 12px;
-    color: var(--text3);
-    letter-spacing: 1px;
-  }
-
-  /* Geri sayım + buton */
-  .ad-bottom-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .ad-info-text {
-    font-size: 12px;
-    color: var(--text3);
-  }
-
-  #adCountdown {
-    font-size: 13px;
-    color: var(--text2);
-    min-width: 80px;
-    text-align: center;
-  }
-
-  #btnNextAd {
-    padding: 10px 22px;
-    border-radius: 8px;
-    border: none;
-    background: var(--accent);
-    color: #fff;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    display: none;
-    transition: opacity 0.2s;
-  }
-
-  #btnNextAd:hover { opacity: 0.85; }
-
-  /* Reklamsız bildirim */
-  #adFreeNotice {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: rgba(13,17,23,0.97);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-
-  #adFreeNotice.hidden { display: none; }
   #privacyModal.hidden { display: none; }
   #privacyModal:not(.hidden) { display: flex; }
-
-  .ad-free-card {
-    background: var(--surface);
-    border: 1px solid rgba(46,160,67,0.4);
-    border-radius: 16px;
-    padding: 40px 32px;
-    max-width: 400px;
-    text-align: center;
-  }
-
-  .ad-free-icon { font-size: 48px; margin-bottom: 16px; }
-
-  .ad-free-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    color: var(--accent2);
-    margin-bottom: 10px;
-  }
-
-  .ad-free-card p {
-    color: var(--text2);
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 8px;
-  }
-
-  .ad-free-timer {
-    font-size: 13px;
-    color: var(--text3);
-    margin-bottom: 24px;
-  }
-
-  .ad-free-timer strong { color: var(--accent2); }
-
-  #btnEnterSite {
-    padding: 12px 32px;
-    border-radius: 10px;
-    border: none;
-    background: var(--accent);
-    color: #fff;
-    font-weight: 700;
-    font-size: 15px;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
-
-  #btnEnterSite:hover { opacity: 0.85; }
 </style>
 
 </head>
 <body>
 
-<!-- ═══════════════════════════════════ AD SPLASH ═══════════════════════════════════ -->
-
-<!-- Reklamsız bildirim (1 saat dolmamışsa gösterilir) -->
-<div id="adFreeNotice" class="hidden">
-  <div class="ad-free-card">
-    <div class="ad-free-icon">🎉</div>
-    <h2>Reklamsız Mod Aktif!</h2>
-    <p>5 reklamı daha önce izlediniz. Kalan süre boyunca hiç reklam görmeyeceksiniz.</p>
-    <p class="ad-free-timer">Reklamsız süre bitimine: <strong id="adFreeCountdownText">—</strong></p>
-    <button id="btnEnterSite" onclick="closeAdFreeNotice()">Siteye Gir 🚀</button>
-  </div>
-</div>
-
-<!-- Reklam splash (5 reklam gösterilir) -->
-<div id="adSplash" class="hidden">
-  <div class="ad-splash-inner">
-
-    <div class="ad-splash-header">
-      <h2>🚗 Ehliyet Sınav Pratik</h2>
-      <p>
-        Site ücretsiz kullanım için reklamlarla desteklenmektedir.<br>
-        <strong>5 reklamı izlerseniz 1 saat boyunca hiç reklam görmeyeceksiniz!</strong>
-      </p>
-    </div>
-
-    <!-- 5 nokta göstergesi -->
-    <div class="ad-counter-row" id="adDots">
-      <div class="ad-dot" id="adDot0"></div>
-      <div class="ad-dot" id="adDot1"></div>
-      <div class="ad-dot" id="adDot2"></div>
-      <div class="ad-dot" id="adDot3"></div>
-      <div class="ad-dot" id="adDot4"></div>
-    </div>
-
-    <!-- Reklam alanı -->
-    <div class="ad-box" id="adBox">
-      <!-- AdSense reklamı buraya eklenir -->
-      <!-- BURAYA KENDİ ADSENSE REKLAM KODUNUZU YAPIŞTIRIN -->
-      <!-- Örnek: -->
-      <ins class="adsbygoogle"
-           style="display:block;width:100%;min-height:250px;"
-           data-ad-client="ca-pub-6591153573099148"
-           data-ad-slot="XXXXXXXXXX"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <div class="ad-loading-label" id="adLoadingLabel">Reklam yükleniyor…</div>
-    </div>
-
-    <div class="ad-bottom-row">
-      <span class="ad-info-text" id="adStepLabel">Reklam 1 / 5</span>
-      <span id="adCountdown">5 saniye…</span>
-      <button id="btnNextAd" onclick="nextAd()">
-        <span id="btnNextAdLabel">Sonraki Reklam →</span>
-      </button>
-    </div>
-
-  </div>
-</div>
-
 <!-- ═══════════════════════════════════ HOME ═══════════════════════════════════ -->
+<!-- ═══════ HEADER REKLAM ALANI ═══════ -->
+<div style="width:100%;background:var(--surface);border-bottom:1px solid var(--border);padding:8px 0;text-align:center;min-height:60px;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+  <p style="font-size:10px;color:var(--text3);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase;">Reklam</p>
+  <!-- Google AdSense Banner 728x90 / Responsive -->
+  <ins class="adsbygoogle"
+       style="display:block;width:100%;max-width:728px;"
+       data-ad-client="ca-pub-6591153573099148"
+       data-ad-slot="XXXXXXXXXX"
+       data-ad-format="horizontal"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
 <div id="home" class="screen active">
   <div class="home-inner">
 
@@ -1006,8 +781,10 @@
       </button>
     </p>
 
-    <p style="font-size:12px; color: var(--text3); margin-top: 20px;">
+    <p style="font-size:12px; color: var(--text3); margin-top: 20px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
       <button onclick="document.getElementById('privacyModal').classList.remove('hidden')" style="background:none;border:none;color:var(--text3);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:12px;font-family:inherit;">Gizlilik Politikası</button>
+      <button onclick="document.getElementById('aboutModal').classList.remove('hidden')" style="background:none;border:none;color:var(--text3);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:12px;font-family:inherit;">Hakkımızda</button>
+      <button onclick="document.getElementById('contactModal').classList.remove('hidden')" style="background:none;border:none;color:var(--text3);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:12px;font-family:inherit;">İletişim</button>
     </p>
   </div>
 </div>
@@ -1054,7 +831,106 @@
   </div>
 </div>
 
-<!-- ═══════════════════ GİZLİLİK POLİTİKASI MODALI ═══════════════════ -->
+<!-- ═══════════════════ HAKKIMIZDA MODALI ═══════════════════ -->
+<style>
+  #aboutModal.hidden { display: none; }
+  #aboutModal:not(.hidden) { display: flex; }
+  #contactModal.hidden { display: none; }
+  #contactModal:not(.hidden) { display: flex; }
+</style>
+
+<div id="aboutModal" class="hidden" style="position:fixed;inset:0;z-index:9998;background:rgba(13,17,23,0.97);align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="width:100%;max-width:680px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px 32px;position:relative;margin:auto;">
+    <button onclick="document.getElementById('aboutModal').classList.add('hidden')" style="position:absolute;top:16px;right:16px;background:var(--surface2);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">✕</button>
+
+    <div style="text-align:center;margin-bottom:28px;">
+      <div style="font-size:48px;margin-bottom:12px;">🚗</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--text);margin-bottom:8px;">Ehliyet Sınav Pratik</h2>
+      <p style="font-size:13px;color:var(--accent);font-weight:600;letter-spacing:1px;text-transform:uppercase;">ehliyetimialiyorum.netlify.app</p>
+    </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:24px;margin-bottom:24px;">
+      <h3 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:12px;">📌 Site Hakkında</h3>
+      <p style="font-size:14px;color:var(--text2);line-height:1.8;">
+        <strong>Ehliyet Sınav Pratik</strong>, Türkiye'deki ehliyet sınavına hazırlanan adaylara ücretsiz pratik imkânı sunmak amacıyla geliştirilmiş bir web platformudur. Site; çıkmış ehliyet soruları, konu bazlı çalışma modları ve gerçek sınav simülasyonu içermektedir.
+      </p>
+    </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:24px;margin-bottom:24px;">
+      <h3 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:12px;">📚 İçerik</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;">
+          <div style="font-size:22px;margin-bottom:6px;">🚦</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">Trafik ve Çevre Bilgisi</div>
+          <div style="font-size:12px;color:var(--text3);">İşaretler, kavşak kuralları, hız sınırları, trafik mevzuatı</div>
+        </div>
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;">
+          <div style="font-size:22px;margin-bottom:6px;">🔧</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">Motor ve Araç Tekniği</div>
+          <div style="font-size:12px;color:var(--text3);">Motor yapısı, elektrik sistemi, bakım ve arıza bilgisi</div>
+        </div>
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;">
+          <div style="font-size:22px;margin-bottom:6px;">🩺</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">İlk Yardım</div>
+          <div style="font-size:12px;color:var(--text3);">Kaza müdahalesi, CPR, temel ilk yardım uygulamaları</div>
+        </div>
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;">
+          <div style="font-size:22px;margin-bottom:6px;">📝</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">Tam Sınav Simülasyonu</div>
+          <div style="font-size:12px;color:var(--text3);">50 soruluk 45 dakikalık gerçek sınav deneyimi</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:24px;margin-bottom:24px;">
+      <h3 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:12px;">👨‍💻 Geliştirici</h3>
+      <p style="font-size:14px;color:var(--text2);line-height:1.8;">
+        Bu platform <strong style="color:var(--text);">Faruk Balcı</strong> tarafından kişisel bir proje olarak geliştirilmiştir. Sınava hazırlanan herkese katkı sağlamak amacıyla tamamen <strong style="color:var(--accent);">ücretsiz</strong> sunulmaktadır. Sitede yer alan tüm sorular, MEB tarafından yayımlanmış çıkmış ehliyet sınav sorularından derlenmektedir.
+      </p>
+    </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:24px;">
+      <h3 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:12px;">⚠️ Sorumluluk Reddi</h3>
+      <p style="font-size:13px;color:var(--text3);line-height:1.7;">
+        Bu sitede yer alan sorular ve bilgiler yalnızca eğitim amaçlıdır. Resmi sınav sonuçları için Milli Eğitim Bakanlığı'nın belirlediği geçerli müfredat ve kaynaklar esas alınmalıdır. Site içeriğinin doğruluğu konusunda garanti verilmemektedir.
+      </p>
+    </div>
+
+    <button onclick="document.getElementById('aboutModal').classList.add('hidden')" style="width:100%;padding:12px;border-radius:10px;border:none;background:var(--surface2);color:var(--text2);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;margin-top:24px;">Kapat</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ İLETİŞİM MODALI ═══════════════════ -->
+<div id="contactModal" class="hidden" style="position:fixed;inset:0;z-index:9998;background:rgba(13,17,23,0.97);align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="width:100%;max-width:500px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px 32px;position:relative;margin:auto;text-align:center;">
+    <button onclick="document.getElementById('contactModal').classList.add('hidden')" style="position:absolute;top:16px;right:16px;background:var(--surface2);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">✕</button>
+
+    <div style="font-size:48px;margin-bottom:16px;">📬</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--text);margin-bottom:12px;">İletişim</h2>
+    <p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:28px;">
+      Soru hatası bildirimi, öneri veya herhangi bir konuda bize ulaşabilirsiniz. Her geri bildirim siteyi daha iyi hale getirmemize katkı sağlar.
+    </p>
+
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:20px;">
+      <p style="font-size:11px;font-weight:800;letter-spacing:2px;color:var(--text3);text-transform:uppercase;margin-bottom:8px;">E-POSTA</p>
+      <a href="mailto:farukbalci93@gmail.com" style="font-size:16px;font-weight:700;color:var(--accent);text-decoration:none;letter-spacing:0.3px;">farukbalci93@gmail.com</a>
+
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
+        <p style="font-size:12px;color:var(--text3);line-height:1.6;">Soru hatası bildirirken lütfen <strong style="color:var(--text2);">soru numarasını</strong> ve <strong style="color:var(--text2);">hata açıklamasını</strong> belirtiniz.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:24px;">
+      <p style="font-size:13px;color:var(--text2);line-height:1.7;">
+        🌐 <strong>Site:</strong> ehliyetimialiyorum.netlify.app<br>
+        👨‍💻 <strong>Geliştirici:</strong> Faruk Balcı<br>
+        📅 <strong>Son güncelleme:</strong> Mart 2026
+      </p>
+    </div>
+
+    <button onclick="document.getElementById('contactModal').classList.add('hidden')" style="width:100%;padding:12px;border-radius:10px;border:none;background:var(--surface2);color:var(--text2);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;">Kapat</button>
+  </div>
+</div>
 <div id="privacyModal" class="hidden" style="position:fixed;inset:0;z-index:9998;background:rgba(13,17,23,0.97);align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
   <div style="width:100%;max-width:700px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px 32px;position:relative;margin:auto;">
     <button onclick="document.getElementById('privacyModal').classList.add('hidden')" style="position:absolute;top:16px;right:16px;background:var(--surface2);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">✕</button>
@@ -1181,6 +1057,18 @@
 
     <!-- Geçme notu bilgisi -->
     <div id="passInfo" style="margin-bottom:24px; padding:14px 20px; border-radius:12px; font-size:13px; font-weight:600;"></div>
+
+    <!-- Sonuç Ekranı Reklam Alanı -->
+    <div style="margin-bottom:24px;text-align:center;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:12px 8px;">
+      <p style="font-size:10px;color:var(--text3);margin-bottom:6px;letter-spacing:1px;text-transform:uppercase;">Reklam</p>
+      <ins class="adsbygoogle"
+           style="display:block;"
+           data-ad-client="ca-pub-6591153573099148"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="rectangle"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
 
     <div class="results-actions">
       <button class="btn btn-primary" onclick="reviewAnswers()">Cevapları İncele</button>
@@ -3229,148 +3117,6 @@ function showScreen(id) {
 }
 
 // ═══════════════════════════════════════════════════════
-// REKLAM SİSTEMİ
-// ═══════════════════════════════════════════════════════
-
-const AD_COUNT       = 5;           // Toplam reklam sayısı
-const AD_WAIT_SEC    = 5;           // Her reklam için bekleme süresi (saniye)
-const AD_FREE_MS     = 60 * 60 * 1000; // Reklamsız süre (1 saat = ms)
-const AD_FREE_KEY    = 'adFreeUntil';
-
-let adCurrentIndex = 0;
-let adCountdownTimer = null;
-
-function getAdFreeUntil() {
-  const val = localStorage.getItem(AD_FREE_KEY);
-  return val ? parseInt(val, 10) : 0;
-}
-
-function setAdFreeUntil() {
-  localStorage.setItem(AD_FREE_KEY, Date.now() + AD_FREE_MS);
-}
-
-function isAdFree() {
-  return Date.now() < getAdFreeUntil();
-}
-
-function formatTimeLeft(ms) {
-  if (ms <= 0) return '0 dk';
-  const totalSec = Math.floor(ms / 1000);
-  const h = Math.floor(totalSec / 3600);
-  const m = Math.floor((totalSec % 3600) / 60);
-  const s = totalSec % 60;
-  if (h > 0) return `${h} sa ${m} dk`;
-  if (m > 0) return `${m} dk ${s} sn`;
-  return `${s} sn`;
-}
-
-function initAdSystem() {
-  if (isAdFree()) {
-    // Reklamsız mod: bildirim göster
-    const remaining = getAdFreeUntil() - Date.now();
-    document.getElementById('adFreeCountdownText').textContent = formatTimeLeft(remaining);
-    document.getElementById('adFreeNotice').classList.remove('hidden');
-
-    // Süreyi canlı güncelle
-    const ticker = setInterval(() => {
-      const r = getAdFreeUntil() - Date.now();
-      if (r <= 0) {
-        clearInterval(ticker);
-        document.getElementById('adFreeCountdownText').textContent = 'Süresi doldu';
-      } else {
-        document.getElementById('adFreeCountdownText').textContent = formatTimeLeft(r);
-      }
-    }, 1000);
-  } else {
-    // Reklam göster
-    adCurrentIndex = 0;
-    document.getElementById('adSplash').classList.remove('hidden');
-    showAd(0);
-  }
-}
-
-function showAd(index) {
-  // Nokta göstergesini güncelle
-  for (let i = 0; i < AD_COUNT; i++) {
-    const dot = document.getElementById('adDot' + i);
-    dot.className = 'ad-dot';
-    if (i < index) dot.classList.add('done');
-    else if (i === index) dot.classList.add('active');
-  }
-
-  // Etiketler
-  const isLast = index === AD_COUNT - 1;
-  document.getElementById('adStepLabel').textContent = `Reklam ${index + 1} / ${AD_COUNT}`;
-  document.getElementById('btnNextAdLabel').textContent = isLast ? 'Siteye Gir 🚀' : 'Sonraki Reklam →';
-  document.getElementById('btnNextAd').style.display = 'none';
-
-  // AdSense'i yeniden tetikle (her reklam gösteriminde)
-  try {
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  } catch(e) {}
-
-  // Geri sayım
-  let sec = AD_WAIT_SEC;
-  document.getElementById('adCountdown').textContent = `${sec} saniye…`;
-  clearInterval(adCountdownTimer);
-  adCountdownTimer = setInterval(() => {
-    sec--;
-    if (sec > 0) {
-      document.getElementById('adCountdown').textContent = `${sec} saniye…`;
-    } else {
-      clearInterval(adCountdownTimer);
-      document.getElementById('adCountdown').textContent = '';
-      document.getElementById('btnNextAd').style.display = 'inline-block';
-    }
-  }, 1000);
-}
-
-function nextAd() {
-  clearInterval(adCountdownTimer);
-  adCurrentIndex++;
-
-  if (adCurrentIndex >= AD_COUNT) {
-    // 5 reklam bitti → 1 saat sür kaydet ve splash kapat
-    setAdFreeUntil();
-    document.getElementById('adSplash').classList.add('hidden');
-    showAdCompletedToast();
-  } else {
-    showAd(adCurrentIndex);
-  }
-}
-
-function showAdCompletedToast() {
-  // Kısa bir başarı bildirimi göster, sonra otomatik kapat
-  const toast = document.createElement('div');
-  toast.style.cssText = `
-    position:fixed; bottom:28px; left:50%; transform:translateX(-50%);
-    background:#1c2128; border:1px solid rgba(46,160,67,0.5);
-    color:#56d364; padding:12px 24px; border-radius:100px;
-    font-size:14px; font-weight:600; z-index:9998;
-    box-shadow:0 4px 24px rgba(0,0,0,0.4);
-    animation: toastIn 0.3s ease;
-  `;
-  toast.textContent = '🎉 Tebrikler! 1 saat boyunca reklam görmeyeceksiniz.';
-
-  const style = document.createElement('style');
-  style.textContent = `@keyframes toastIn { from { opacity:0; transform:translateX(-50%) translateY(12px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }`;
-  document.head.appendChild(style);
-  document.body.appendChild(toast);
-
-  setTimeout(() => {
-    toast.style.transition = 'opacity 0.4s';
-    toast.style.opacity = '0';
-    setTimeout(() => toast.remove(), 400);
-  }, 3500);
-}
-
-function closeAdFreeNotice() {
-  document.getElementById('adFreeNotice').classList.add('hidden');
-}
-
-// Sayfa yüklenince reklam sistemini başlat
-window.addEventListener('DOMContentLoaded', initAdSystem);
-
 // ═══════════════════════════════════════════════════════
 
 // Klavye navigasyonu
